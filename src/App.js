@@ -1,8 +1,10 @@
-import logo from './logo.svg';
+
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from './Layout/Main';
 import Login from './component/Login';
+import { Toaster } from 'react-hot-toast';
+import SignUp from './component/SignUp';
 
 const router = createBrowserRouter([
   {
@@ -14,14 +16,18 @@ const router = createBrowserRouter([
     element: <Login></Login>
   },
   {
-    path: '/register'
+    path: '/register',
+    element: <SignUp></SignUp>
   }
 ])
 
 function App() {
   
   return (
-    <RouterProvider router={router}></RouterProvider>
+    <div>
+      <RouterProvider router={router}></RouterProvider>
+      <Toaster position="top-center" reverseOrder={false} />
+    </div>
   );
 }
 

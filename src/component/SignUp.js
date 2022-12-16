@@ -13,14 +13,13 @@ const SignUp = () => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
-    const imageUrl = form.imageUrl.value;
     const email = form.email.value;
     const password = form.password.value;
 
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        handleUpdateProfile(name, imageUrl);
+        handleUpdateProfile(name);
         form.reset();
         navigate('/');
         toast.success("Sign in successful.");
@@ -45,28 +44,17 @@ const SignUp = () => {
           <form onSubmit={handleLogin} className="card-body ">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Name</span>
+                <span className="label-text">User Name</span>
               </label>
               <input
                 type="text"
-                placeholder="name"
+                placeholder="user name"
                 className="input input-bordered"
                 name="name"
                 required
               />
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Image Url</span>
-              </label>
-              <input
-                type="text"
-                placeholder="image url"
-                className="input input-bordered"
-                name="imageUrl"
-                required
-              />
-            </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
