@@ -24,20 +24,18 @@ const Post = ({ postt, handleDelete, handleLike, handleComment }) => {
             </button>
             <div>
               <p>{like}</p>
-              <button onClick={() =>{handleLike(_id,like)}} className="btn btn-xs">Like</button>
+              <button
+                onClick={() => {
+                  handleLike(_id, like);
+                }}
+                className="btn btn-xs"
+              >
+                Like
+              </button>
             </div>
-          </div>
-          <div>
-            <form>
-              <div className="flex justify-center items-center">
-                <textarea
-                  className="textarea textarea-bordered"
-                  placeholder="comment"
-                  name="comment"
-                ></textarea>
-                <input type="submit" value="Comment" className="btn btn-sm ml-5" />
-              </div>
-            </form>
+            <Link to={`/comment/${_id}`} className="btn">
+              Comment
+            </Link>
           </div>
         </div>
       </div>

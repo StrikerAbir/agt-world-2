@@ -41,6 +41,13 @@ const AllPost = () => {
           });
     }
 
+    const handleComment = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const comment = form.comment.value;
+        console.log(comment);
+    }
+
   return (
     <div>
       {posts.map((post) => (

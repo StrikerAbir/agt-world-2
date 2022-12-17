@@ -7,6 +7,7 @@ import { Toaster } from 'react-hot-toast';
 import SignUp from './component/SignUp';
 import Forget from './component/Forget';
 import Update from './component/Update';
+import Comment from './component/Comment';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
   {
     path: "/update/:id",
     element: <Update></Update>,
+    loader: async ({ params }) => fetch(`http://localhost:1000/upPost/${params.id}`),
+  },
+  {
+    path: "/comment/:id",
+    element: <Comment></Comment>,
     loader: async ({ params }) => fetch(`http://localhost:1000/upPost/${params.id}`),
   },
 ]);
