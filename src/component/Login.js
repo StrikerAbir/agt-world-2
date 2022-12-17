@@ -11,20 +11,27 @@ const Login = () => {
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
+    const name = form.name.value;
+      const password = form.password.value;
+      fetch(`http://localhost:1000/user?name=${name}`)
+          .then(res => res.json())
+          .then(data => {
+              if (data.email) {
+                  login(data.email, password)
+                    .then((result) => {
+                      const user = result.user;
+                      form.reset();
+                      toast.success("Welcome.");
+                      navigate("/");
+                    })
+                    .catch((err) => {
+                      console.error(err);
+                      toast.error(err.message);
+                    });
+              } else{toast.error('Wrong user name')}
+          });
 
-    login(email, password)
-      .then((result) => {
-        const user = result.user;
-        form.reset();
-        toast.success("Welcome.");
-        navigate('/');
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error(err.message);
-      });
+    
   };
 
   return (
@@ -36,13 +43,13 @@ const Login = () => {
           <form onSubmit={handleLogin} className="card-body ">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text">User Name</span>
               </label>
               <input
-                type="email"
-                placeholder="email"
+                type="text"
+                placeholder="user name"
                 className="input input-bordered"
-                name="email"
+                name="name"
                 required
               />
             </div>

@@ -17,7 +17,7 @@ const SignUp = () => {
     const userC = { name, email };
     
     fetch(`http://localhost:1000/user?name=${name}`)
-      .then(res=>res.json()).then(data=> setUname(data));
+      .then(res=>res.json()).then(data=> setUname(data.available));
     if (uname === false) {
       createUser(email, password)
         .then((result) => {
