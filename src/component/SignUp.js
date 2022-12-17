@@ -1,13 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 
-
 const SignUp = () => {
-
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [uname, setUname] = useState(false);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -15,29 +14,48 @@ const SignUp = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
+    const userC = { name, email };
+    
+    fetch(`http://localhost:1000/user?name=${name}`)
+      .then(res=>res.json()).then(data=> setUname(data));
+    if (uname === false) {
+      createUser(email, password)
+        .then((result) => {
+          const user = result.user;
+          handleUpdateProfile(name);
+          fetch("http://localhost:1000/user", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(userC),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              form.reset();
+              navigate("/");
+              toast.success("Sign in successful.");
+            });
 
-    createUser(email, password)
-      .then((result) => {
-        const user = result.user;
-        handleUpdateProfile(name);
-        form.reset();
-        navigate('/');
-        toast.success("Sign in successful.");
-        console.log(user);
-      })
-      .catch((err) => console.error(err));
-  };
+          console.log(user);
+        })
+        .catch((err) => toast.error(err.message));
+        const handleUpdateProfile = (name) => {
+          const profile = { displayName: name };
+          updateUserProfile(profile)
+            .then(() => {})
+            .catch((error) => console.error("error", error));
+        }
+    } else {
+      toast.error('User name already used');
+    }
 
-  const handleUpdateProfile = (name, imageUrl) => {
-    const profile = { displayName: name, photoURL: imageUrl };
-    updateUserProfile(profile)
-      .then(() => {})
-      .catch((error) => console.error("error", error));
+
   };
   return (
     <div className="hero w-full my-20">
       <div className="hero-content flex-col w-full lg:flex-row">
-        
         <div className="card py-5 flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <h1 className="text-5xl text-center font-bold">Sign Up</h1>
           {/* form */}

@@ -5,6 +5,7 @@ import Main from './Layout/Main';
 import Login from './component/Login';
 import { Toaster } from 'react-hot-toast';
 import SignUp from './component/SignUp';
+import Forget from './component/Forget';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <SignUp></SignUp>
+  },
+  {
+    path: '/forget',
+    element: <Forget></Forget>
   }
 ])
 

@@ -18,7 +18,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         form.reset();
-        toast.success("Welcome to T-Drawing.");
+        toast.success("Welcome.");
         navigate('/');
       })
       .catch((err) => {
@@ -58,7 +58,7 @@ const Login = () => {
                 required
               />
               <label className="label">
-                <Link to="/" className="label-text-alt link link-hover">
+                <Link to="/forget" className="label-text-alt link link-hover">
                   Forgot password?
                 </Link>
               </label>
