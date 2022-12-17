@@ -6,17 +6,17 @@ const Update = () => {
   const post = useLoaderData();
   const navigate = useNavigate();
 
-    const handleUpdate = (event) => {
-        event.preventDefault()
-        const form = event.target;
-        const upPost= form.upPost.value;
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const upPost = form.upPost.value;
     //   console.log(post._id,upPost);
-    fetch(`http://localhost:1000/postUpdate?id=${post._id}`, {
+    fetch(`https://agt-serverside.vercel.app/postUpdate?id=${post._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
-        body: JSON.stringify({ upPost }),
+      body: JSON.stringify({ upPost }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -25,8 +25,7 @@ const Update = () => {
           toast.success("Post updated");
           navigate("/");
         } else {
-            
-            toast.error("Try again");
+          toast.error("Try again");
         }
       });
   };
@@ -43,10 +42,10 @@ const Update = () => {
               </label>
               <textarea
                 className="textarea textarea-bordered h-24"
-                              placeholder="post"
-                              defaultValue={post.post}
-                              name="upPost"
-                              required
+                placeholder="post"
+                defaultValue={post.post}
+                name="upPost"
+                required
               ></textarea>
             </div>
 

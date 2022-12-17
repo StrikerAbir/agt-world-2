@@ -1,37 +1,36 @@
-import React, { useContext, useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthProvider';
+import React, { useContext, useState } from "react";
+import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
-      const password = form.password.value;
-      fetch(`http://localhost:1000/user?name=${name}`)
-          .then(res => res.json())
-          .then(data => {
-              if (data.email) {
-                  login(data.email, password)
-                    .then((result) => {
-                      const user = result.user;
-                      form.reset();
-                      toast.success("Welcome.");
-                      navigate("/");
-                    })
-                    .catch((err) => {
-                      console.error(err);
-                      toast.error(err.message);
-                    });
-              } else{toast.error('Wrong user name')}
-          });
-
-    
+    const password = form.password.value;
+    fetch(`https://agt-serverside.vercel.app/user?name=${name}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.email) {
+          login(data.email, password)
+            .then((result) => {
+              const user = result.user;
+              form.reset();
+              toast.success("Welcome.");
+              navigate("/");
+            })
+            .catch((err) => {
+              console.error(err);
+              toast.error(err.message);
+            });
+        } else {
+          toast.error("Wrong user name");
+        }
+      });
   };
 
   return (

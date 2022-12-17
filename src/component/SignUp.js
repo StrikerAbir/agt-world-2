@@ -16,14 +16,14 @@ const SignUp = () => {
     const password = form.password.value;
     const userC = { name, email };
     
-    fetch(`http://localhost:1000/user?name=${name}`)
+    fetch(`https://agt-serverside.vercel.app/user?name=${name}`)
       .then(res=>res.json()).then(data=> setUname(data.available));
     if (uname === false) {
       createUser(email, password)
         .then((result) => {
           const user = result.user;
           handleUpdateProfile(name);
-          fetch("http://localhost:1000/user", {
+          fetch("https://agt-serverside.vercel.app/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",
