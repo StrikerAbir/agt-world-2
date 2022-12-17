@@ -27,7 +27,7 @@ const Forget = () => {
       <div className="hero w-full my-20">
         <div className="hero-content flex-col w-full lg:flex-row">
           <div className="card py-5 flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <h1 className="text-5xl text-center font-bold">Login now!</h1>
+            <h1 className="text-5xl text-center font-bold">Forget password</h1>
             {/* form */}
             <form onSubmit={handleForget} className="card-body ">
               <div className="form-control">

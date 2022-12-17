@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Post = ({ postt,handleDelete }) => {
     const {_id, name, post, like } = postt
@@ -11,7 +12,7 @@ const Post = ({ postt,handleDelete }) => {
                     <h2 className="card-title">{ name}</h2>
                     <p>{ post}</p>
             <div className="card-actions justify-end">
-              <button className="btn">Update</button>
+              <Link  to={`/update/${_id}`} className="btn">Update</Link>
               <button className="btn" onClick={()=>{handleDelete(_id)}}>Delete</button>
             </div>
           </div>

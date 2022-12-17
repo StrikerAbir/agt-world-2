@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import Post from './Post';
 
 const AllPost = () => {
     const [posts, setPosts] = useState([]);
-     
+
          
     useEffect(() => {
         fetch(`http://localhost:1000/posts`)
@@ -23,6 +24,8 @@ const AllPost = () => {
                 }
             });
     }
+
+    
    
     return (
         <div>
